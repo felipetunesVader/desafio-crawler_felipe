@@ -18,10 +18,11 @@ logging.basicConfig(level=logging.INFO)
 
 def connect_to_db():
     connection = psycopg2.connect(
-        host="localhost",
         database="movies_db",
         user="postgres",
-        password="modric19"
+        password="modric19",
+        host="host.docker.internal",
+        port="5432"
     )
     return connection
 
