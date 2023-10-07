@@ -5,8 +5,13 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
 import psycopg2
-import pandas as pd  # Importação do Pandas
+import pandas as pd
+
+pd.set_option('display.max_columns', None)
+pd.set_option('display.expand_frame_repr', False)
+pd.set_option('max_colwidth', None)
 
 logging.basicConfig(level=logging.INFO)
 
@@ -22,10 +27,16 @@ def connect_to_db():
 
 
 def initialize_webdriver():
-    driver = webdriver.Chrome()
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("window-size=1920x1080")
+    user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36"
+    chrome_options.add_argument(f"user-agent={user_agent}")
+
+    driver = webdriver.Chrome(options=chrome_options)
     return driver
-
-
 def extract_top_movie_links(num=1):
     URL = "https://www.imdb.com/chart/top/?ref_=nv_mv_250"
     driver.get(URL)
@@ -106,9 +117,12 @@ def insert_into_table(connection, movie_data):
 
 
 def visualize_data_with_pandas(connection):
-    # Usar Pandas para ler os dados do banco de dados
+
     df = pd.read_sql('SELECT * FROM movies', connection)
-    print(df.head(10))  # Visualizar os primeiros 10 registros
+    print(df.head(10))
+
+def take_screenshot(driver, filename="screenshot.png"):
+    driver.save_screenshot(filename)
 
 
 if __name__ == "__main__":
@@ -117,7 +131,7 @@ if __name__ == "__main__":
     logging.info("WebDriver iniciado.")
 
     logging.info("Extraindo links dos filmes...")
-    top_movie_links = extract_top_movie_links(10)
+    top_movie_links = extract_top_movie_links(2)
     logging.info(f"Links extraídos: {top_movie_links}")
 
     all_movie_details = []
@@ -128,6 +142,9 @@ if __name__ == "__main__":
         all_movie_details.append(movie_details)
         logging.info(movie_details)
 
+        screenshot_filename = movie_details["title"].replace(" ", "_") + ".png"
+        take_screenshot(driver, screenshot_filename)
+
     save_to_json(all_movie_details, "filmes.json")
     save_to_csv(all_movie_details, "filmes.csv")
 
@@ -136,7 +153,7 @@ if __name__ == "__main__":
     connection = connect_to_db()
     insert_into_table(connection, all_movie_details)
 
-    # Adicionando a chamada da função de visualização após inserção no banco de dados
+
     visualize_data_with_pandas(connection)
 
     connection.close()
