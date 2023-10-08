@@ -1,50 +1,37 @@
-# beeMôn:
+#  Desafio beeMôn Felipe Antunes:
 
-Na beeMôn criamos muitos sistemas de raspagem de dados e buscamos todos os dias inovação na analise dos dados. Este desafio esta aberto para todos que quiserem abrir um fork e submeter suas ideias de tecnologia.
+realizei as tasks utilizando python, postgre e docker. Extraio nome, ano, rating, diretores, escritores e atores dos filmes. Realizo o screenshot e salvo as png's na pasta raiz do diretório juntamente com os arquivos CSV e JSON. Realizo a inserção no banco e imprimo o data frame no output. O código principal está localizado no arquivo app.py, criei um arquivo de setup do banco e um outro arquivo a parte para rodar o script de forma agendada. O site escolhido foi o imdb: (https://www.imdb.com/chart/top/?ref_=nv_mv_250)
+foi utilizado o python 3.9 na construção da aplicação.
+
+bibliotecas usadas:
+ - selenium
+ - pandas
+ - csv
+ - json
+ - logging
+ - psycopg2
 
 ## Desafio:
 Escolher uma dos sites abaixo para fazer o desafio
 
-- [quotes.toscrape](https://quotes.toscrape.com/)
 - [imdb.com](https://www.imdb.com/chart/top/?ref_=nv_mv_250)
 
 ### Minimo Entregável:
 
-- Buscar dados de forma automatizada(script de linha de comando ou interface clicavel)
-- Padronizar os retornos de forma estruturada (json/csv)
-- Sistema de logs de para acompanhamento da execução
-- Ter um prova da consulta (Screenshot)
+- Buscar dados de forma automatizada(script de linha de comando ou interface clicavel)   -- FEITO
+- Padronizar os retornos de forma estruturada (json/csv) --  FEITO
+- Sistema de logs de para acompanhamento da execução  -- FEITO
+- Ter um prova da consulta (Screenshot) -- FEITO
 
 ### Pontos Extra para:
 
-- Armazenamento dos resultados em um banco relacional ou não relacional
-- fazer um dataframe que possibilite visualizar os resultados via pandas
-- Trazer resultados de forma dinamica sem fixar caminhos no `xpath`
-- Dockerizar a aplicação
-- Conseguir agendar uma execução para um dia e horario.
-
-### Libs sugeridas:
-
- - Selenium 
- - Scrapy
- - Pandas
- - Requests
- - BeautifulSoup 
+- Armazenamento dos resultados em um banco relacional ou não relacional -- FEITO
+- fazer um dataframe que possibilite visualizar os resultados via pandas -- FEITO
+- Trazer resultados de forma dinamica sem fixar caminhos no `xpath` -- FEITO
+- Dockerizar a aplicação -- FEITO
+- Conseguir agendar uma execução para um dia e horario. -- FEITO
 
 
-### O que iremos avaliar:
-
-- Conhecimento em HTML
-- Conhecimento em fluxo de request/response
-- Conhecimento em extração de dados
-- Conhecimento em base64
-- Boas práticas de programação
-- Utilização de bibliotecas de terceiros
-- Documentação
-- Criatividade
-- Cobertura de testes
-- Tempo de execução do código
-- Versionamento do código
 
 
 
