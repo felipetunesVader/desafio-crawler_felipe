@@ -1,4 +1,5 @@
 import psycopg2
+import os
 
 
 def connect_to_db():
