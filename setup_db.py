@@ -3,12 +3,13 @@ import psycopg2
 
 def connect_to_db():
     connection = psycopg2.connect(
-        host="localhost",
+        host=os.environ.get("DATABASE_HOST", "localhost"),
         database="movies_db",
         user="postgres",
         password="modric19"
     )
     return connection
+
 
 
 def create_table(connection):
