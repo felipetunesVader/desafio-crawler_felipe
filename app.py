@@ -104,6 +104,24 @@ def save_to_csv(data, filename="output.csv"):
         dict_writer.writeheader()
         dict_writer.writerows(data)
 
+def check_and_create_table(connection):
+    cursor = connection.cursor()
+    cursor.execute(''' 
+        CREATE TABLE IF NOT EXISTS movies (
+            id SERIAL PRIMARY KEY,
+            title TEXT,
+            year TEXT,
+            rating TEXT,
+            genres TEXT[],
+            director TEXT[],
+            writers TEXT[],
+            stars TEXT[]
+        )
+    ''')
+    connection.commit()
+    cursor.close()
+
+
 def insert_into_table(connection, movie_data):
     cursor = connection.cursor()
 
@@ -153,6 +171,7 @@ if __name__ == "__main__":
     driver.close()
 
     connection = connect_to_db()
+    check_and_create_table(connection)
     insert_into_table(connection, all_movie_details)
 
 
