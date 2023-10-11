@@ -6,6 +6,9 @@ foi utilizado o python 3.9 na construção da aplicação.
 Pontos sobre o código:
  - O usuário pode modificar a linha 135 de sintaxe( top_movie_links = extract_top_movie_links(2) ) para determinar o numero de filmes que deseja extrair do site. No exemplo fornecido estão sendo extraídos dois filmes.
 
+Para rodar o código execute o comando : docker-compose up --build
+
+
 bibliotecas usadas:
  - selenium
  - pandas
@@ -13,6 +16,8 @@ bibliotecas usadas:
  - json
  - logging
  - psycopg2
+banco de dados relacional:
+ - PostgreSQL (PgAdmin4)
 
 Fluxo Principal
 Se o script for executado como principal:
