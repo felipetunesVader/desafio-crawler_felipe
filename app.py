@@ -1,6 +1,7 @@
 import json
 import csv
 import logging
+import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -18,13 +19,13 @@ logging.basicConfig(level=logging.INFO)
 
 def connect_to_db():
     connection = psycopg2.connect(
+        host=os.environ.get("DATABASE_HOST", "localhost"),
         database="movies_db",
         user="postgres",
-        password="modric19",
-        host="host.docker.internal",
-        port="5432"
+        password="modric19"
     )
     return connection
+
 
 
 def initialize_webdriver():
